@@ -13,8 +13,20 @@ public class Player : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown("space"))
         {
-            rb.AddForce(new Vector3(0f, 400f, 0f));    
+            rb.AddForce(new Vector3(0f, 400f, 0f));
         }
+
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.LoadLevel(0);
+        }
+
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if(Input.GetTouch(i).phase == TouchPhase.Began)
+                rb.AddForce(new Vector3(0f, 400f, 0f));
+        }
+
         this.totalDistance += 1;
 	}
 
@@ -34,6 +46,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.CompareTag("enemy"))
         {
             this.gameObject.SetActive(false);
+            Application.LoadLevel(0);
             other.gameObject.GetComponent<Rigidbody>().AddForce(200f, 0f, 0f);
         }
     }
