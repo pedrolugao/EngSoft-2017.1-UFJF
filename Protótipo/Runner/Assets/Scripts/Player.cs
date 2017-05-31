@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
     public Rigidbody rb;
+    public Text countMoney;
+    public Text countDistance;
     public int totalMoney;
     private int totalDistance = 0;
     private bool noAr;
@@ -50,19 +52,15 @@ public class Player : MonoBehaviour {
         }
 
         this.totalDistance += 1;
+        countDistance.text = "Distancia: " + totalDistance.ToString();
 	}
-
-    int getDistance()
-    {
-        return this.totalDistance;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("coin"))
         {
             this.totalMoney += 1;
-            updateText();
+            countMoney.text = "Moedas: " + totalMoney.ToString();
             other.gameObject.SetActive(false);
         }
 
@@ -74,8 +72,4 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void updateText()
-    {
-        
-    }
 }
