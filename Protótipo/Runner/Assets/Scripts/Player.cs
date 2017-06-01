@@ -12,8 +12,29 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        DontDestroyOnLoad(this);
         noAr = false;
 	}
+
+    public int GetMoney()
+    {
+        return this.totalMoney;
+    }
+
+    public void SetMoney(int money)
+    {
+        this.totalMoney = money;
+    }
+
+    public int GetDistance()
+    {
+        return this.totalDistance;
+    }
+
+    public void SetDistance(int distance)
+    {
+        this.totalDistance = distance;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -66,9 +87,8 @@ public class Player : MonoBehaviour {
 
         if (other.gameObject.CompareTag("enemy"))
         {
-            this.gameObject.SetActive(false);
-            Application.LoadLevel(0);
-            other.gameObject.GetComponent<Rigidbody>().AddForce(200f, 0f, 0f);
+            //this.gameObject.SetActive(false);
+            Application.LoadLevel("GameOver");
         }
     }
 
