@@ -3,21 +3,16 @@ using UnityEditor;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
-
 public class Test {
 
 	[Test]
-	public void TestSimplePasses() {
+	public void CounterAddsGold() {
         // Use the Assert class to test conditions.
-        Assert.That(2 + 2 == 4);
+        Counter contador = new Counter();
+        int ouro = contador.ouroTotal;
+        contador.aumentarOuro(1);
+        Assert.That(ouro+1 == contador.ouroTotal);
 	}   
 
-	// A UnityTest behaves like a coroutine in PlayMode
-	// and allows you to yield null to skip a frame in EditMode
-	[UnityTest]
-	public IEnumerator TestWithEnumeratorPasses() {
-		// Use the Assert class to test conditions.
-		// yield to skip a frame
-		yield return null;
-	}
+	
 }

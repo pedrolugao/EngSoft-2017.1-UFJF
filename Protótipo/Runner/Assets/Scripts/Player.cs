@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public Text countDistance;
     public int totalMoney;
     private int totalDistance = 0;
-    private bool noAr;
+    public bool noAr;
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -35,6 +35,11 @@ public class Player : MonoBehaviour {
     {
         this.totalDistance = distance;
     }
+
+    public void adicionarOuro(int x)
+    {
+        totalMoney += x;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour {
         {
             if (noAr == false)
             {
-                noAr = true;
+                //noAr = true;
                 rb.AddForce(new Vector3(0f, 400f, 0f));
             }
         }
@@ -57,12 +62,12 @@ public class Player : MonoBehaviour {
             if (Input.GetTouch(i).phase == TouchPhase.Began)
                 if (noAr == false)
                 {
-                    noAr = true;
+                    //noAr = true;
                     rb.AddForce(new Vector3(0f, 400f, 0f));
                 }
         }
-        print(rb.position);
-        if(rb.position.y <= 0.63)
+        //print(rb.position);
+        if(rb.position.y <= 0.6301)
         {
 
             noAr = false;
