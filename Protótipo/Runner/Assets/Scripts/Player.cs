@@ -45,6 +45,7 @@ public class Player : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown("space"))
         {
+ 
             if (noAr == false)
             {
                 //noAr = true;
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour {
 
         this.totalDistance += 1;
         countDistance.text = "Distancia: " + totalDistance.ToString();
+
 	}
 
     private void OnTriggerEnter(Collider other)
