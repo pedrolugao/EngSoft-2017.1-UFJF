@@ -1,0 +1,6 @@
+Cenas para menu e fim de jogo (para alterar cenas https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html)
+Inserir controles por touch (No segundo exemplo, nas linhas 60 e 74, ele define se o controle é por teclado ou toque)
+	-https://docs.unity3d.com/ScriptReference/Touch.html
+	-https://unity3d.com/pt/learn/tutorials/projects/2d-roguelike-tutorial/adding-mobile-controls?playlist=17150
+Criar luz global
+Melhorar geração de objetos
