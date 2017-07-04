@@ -7,14 +7,13 @@ public class GetPoints : MonoBehaviour {
 
     public Text money;
     public Text distance;
-    public Player player;
-    public GameObject playerObj;
-	// Use this for initialization
-	void Start () {
-        playerObj = GameObject.Find("Player");
-        player = playerObj.GetComponent<Player>();
-        money.text = "Moedas: " + player.GetMoney().ToString();
-        distance.text = "Distancia: " + player.GetDistance().ToString();
-        Destroy(playerObj, 5f);
+    public GameObject userStatsObj;
+    public UserStatistics userStats;
+    // Use this for initialization
+    void Start () {
+        userStatsObj = GameObject.Find("UserStats");
+        userStats = userStatsObj.GetComponent<UserStatistics>();
+        money.text = "Moedas: " + userStats.lastMoney.ToString();
+        distance.text = "Distancia: " + userStats.lastScore.ToString();
     }
 }

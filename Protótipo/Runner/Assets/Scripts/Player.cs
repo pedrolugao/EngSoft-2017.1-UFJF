@@ -3,16 +3,21 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
-    public Rigidbody rb;
+    public Rigidbody2D rb;
+    public GameObject userStatsObj;
+    public UserStatistics userStats;
     public Text countMoney;
     public Text countDistance;
     public int totalMoney;
     private int totalDistance = 0;
     public bool noAr;
+    private Animator animator;
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();
-        DontDestroyOnLoad(this);
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        userStatsObj = GameObject.Find("UserStats");
+        userStats = userStatsObj.GetComponent<UserStatistics>();
         noAr = false;
 	}
 
@@ -43,13 +48,14 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (Input.GetKeyDown("space"))
         {
- 
             if (noAr == false)
             {
                 //noAr = true;
-                rb.AddForce(new Vector3(0f, 400f, 0f));
+                rb.AddForce(new Vector2(0f, 400f));
+                animator.SetTrigger("Jump");
             }
         }
 
@@ -64,11 +70,12 @@ public class Player : MonoBehaviour {
                 if (noAr == false)
                 {
                     //noAr = true;
-                    rb.AddForce(new Vector3(0f, 400f, 0f));
+                    rb.AddForce(new Vector2(0f, 400f));
+                    animator.SetTrigger("Jump");
                 }
         }
         //print(rb.position);
-        if(rb.position.y <= 0.6301)
+        if(rb.position.y <= 0.666)
         {
 
             noAr = false;
@@ -80,21 +87,23 @@ public class Player : MonoBehaviour {
 
         this.totalDistance += 1;
         countDistance.text = "Distancia: " + totalDistance.ToString();
-
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("coin"))
+        if (other.tag == "coin")
         {
             this.totalMoney += 1;
             countMoney.text = "Moedas: " + totalMoney.ToString();
             other.gameObject.SetActive(false);
         }
-
-        if (other.gameObject.CompareTag("enemy"))
+        else
         {
-            //this.gameObject.SetActive(false);
+            userStats.totalScore += this.totalDistance;
+            userStats.lastScore = this.totalDistance;
+            userStats.totalMoney += this.totalMoney;
+            userStats.lastMoney = this.totalMoney;
+            Destroy(this);
             Application.LoadLevel("GameOver");
         }
     }
